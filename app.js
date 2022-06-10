@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const adminRoutes = require("./routes/adminRoutes");
+const studentRoutes = require("./routes/studentRoutes")
 const mongoose = require("mongoose")
 app.use(express.urlencoded({
     extended: false
@@ -24,7 +25,7 @@ app.get("/", (req, res) => {
     res.status(200).send("Hello world ")
 })
 app.use(adminRoutes);
-// creating Student
+app.use(studentRoutes);
 
 
 
