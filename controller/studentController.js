@@ -49,6 +49,42 @@ exports.getStudentData = (req, res, next) => {
     });
 };
 
+
+exports.results = (req,res) =>{
+    
+    const filters = req.query
+    
+    const decodedToken = JWT.verify(req.headers.token, "CelebalSecretKey");
+    MarkSheet.findOne({StudentID:decodedToken.StudentID}).then((student)=>{
+        {
+           return res.status(200).send(student)
+           
+          }
+      }).catch((error)=>{
+        return res.status(500).send(error)
+      })
+      
+      
+    } 
+  
+//         const result = {}
+//         { 
+//             for (key in filters){
+//                 result.key = student.key
+//             }
+            
+//           console.log(result)
+//         }
+//     }).catch((error)=>{
+//       return res.status(500).send(error)
+//     })
+
+// }
+
+
+
+
+
 const getToken = (student) => {
     return (token = JWT.sign({
             StudentID: student.StudentID,
