@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const adminRoutes = require("./routes/adminRoutes");
 const mongoose = require("mongoose")
 app.use(express.urlencoded({
     extended: false
@@ -7,7 +8,6 @@ app.use(express.urlencoded({
 app.use(express.json())
 
 
-const Student = require("./model/Student")
 
 // Connecting to MongoDB
 mongoose.connect("mongodb://localhost:27017/Celebal", {
@@ -23,39 +23,21 @@ mongoose.connect("mongodb://localhost:27017/Celebal", {
 app.get("/", (req, res) => {
     res.status(200).send("Hello world ")
 })
-
+app.use(adminRoutes);
 // creating Student
 
-app.post("/newStudent", (req, res) => {
-    let {
-        StudentID,
-        FirstName,
-        LastName,
-        DOB,
-        Gender,
-        Year
-    } = req.body
-    let student = new Student({
-        StudentID,
-        FirstName,
-        LastName,
-        DOB,
-        Gender,
-        Year,
-    })
-    student.save().then(() => {
-        return res.status(200).send({
-            student
-        });
 
-    }).catch((error) => {
-        console.error(error);
-        return res.status(500).send("Error")
-    })
-})
 
 
 const Port = 9160;
 app.listen(Port, () => {
     console.log(`Connection Established with port number: ${Port}`)
 })
+
+
+
+
+// 
+
+
+  
