@@ -22,7 +22,7 @@ exports.canAddStudent = (req, res, next) => {
   }
 };
 
-
+//a admin can only edit his/her details
 exports.canEditAdmin = (req, res, next) => {
     try {
       if (!req.headers.token) {
@@ -50,7 +50,7 @@ exports.canEditAdmin = (req, res, next) => {
     }
   };
 
-  // getting 
+  // token verification for student
 
   exports.canViewStudent = (req, res, next) => {
     try {

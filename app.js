@@ -24,21 +24,15 @@ mongoose.connect("mongodb://localhost:27017/Celebal", {
 app.get("/", (req, res) => {
     res.status(200).send("Hello world ")
 })
+
 app.use(adminRoutes);
 app.use(studentRoutes);
-
-
 
 
 const Port = 9160;
 app.listen(Port, () => {
     console.log(`Connection Established with port number: ${Port}`)
 })
-
-
-
-
-// 
 
 
   

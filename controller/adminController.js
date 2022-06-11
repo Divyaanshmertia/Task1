@@ -1,9 +1,8 @@
 const Student = require("../model/Student")
 const MarkSheet = require("../model/MarkSheet")
-const mongoose = require("mongoose")
 const JWT = require("jsonwebtoken")
 const Admin = require("../model/Admin")
-const { nextTick } = require("process")
+
 
 exports.createStudent = (req, res) => {
     let {
@@ -191,7 +190,7 @@ exports.updateStudent = (req, res) => {
         });
 };
 
-exports.deleteStudentMarkSheet = (req, res) => {
+exports.deleteStudentMarkSheet = (req, res,next) => {
     let studentId = req.params.id
     MarkSheet.deleteOne({StudentID:studentId}).then((student)=>{
     

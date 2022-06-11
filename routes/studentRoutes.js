@@ -5,5 +5,5 @@ const studentControllers = require("../controller/studentController");
 router.get("/student/Login", studentControllers.LoginStudent )
 router.get("/student/me", middleware.canViewStudent, studentControllers.getStudentData);
 router.put("/student/update", middleware.canViewStudent,studentControllers.updateStudent)
-router.get("/student/result" , studentControllers.results);
+router.get("/student/result" ,middleware.canViewStudent, studentControllers.results);
 module.exports = router
