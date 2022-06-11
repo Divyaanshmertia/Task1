@@ -1,8 +1,6 @@
 const Student = require("../model/Student")
 const MarkSheet = require("../model/MarkSheet")
-const mongoose = require("mongoose")
 const JWT = require("jsonwebtoken")
-const Admin = require("../model/Admin")
 
 exports.LoginStudent = (req,res)=>{
     let{StudentID} = req.body
@@ -52,11 +50,17 @@ exports.getStudentData = (req, res, next) => {
 
 exports.results = (req,res) =>{
     
-    const filters = req.query
     
     const decodedToken = JWT.verify(req.headers.token, "CelebalSecretKey");
-    MarkSheet.findOne({StudentID:decodedToken.StudentID}).then((student)=>{
+    let q = (Object.keys(req.query))
+    q1 = q[0];
+    projection = { _id: 0, [q1]: 1 };
+    
+    
+    console.log(projection)
+    MarkSheet.findOne({StudentID:decodedToken.StudentID},projection).then((student)=>{
         {
+
            return res.status(200).send(student)
            
           }
@@ -66,24 +70,6 @@ exports.results = (req,res) =>{
       
       
     } 
-  
-//         const result = {}
-//         { 
-//             for (key in filters){
-//                 result.key = student.key
-//             }
-            
-//           console.log(result)
-//         }
-//     }).catch((error)=>{
-//       return res.status(500).send(error)
-//     })
-
-// }
-
-
-
-
 
 const getToken = (student) => {
     return (token = JWT.sign({

@@ -7,4 +7,6 @@ router.put("/admin/update/:id", middleware.canEditAdmin, adminControllers.update
 router.post("/admin/addMarklist",adminControllers.createMarklist )
 router.post("/admin/addAdmin", adminControllers.createAdmin)
 router.get("/admin/Login", adminControllers.LoginAdmin)
+router.put("/admin/students/:id", middleware.canAddStudent,adminControllers.updateStudent )
+router.delete("/admin/students/:id", middleware.canAddStudent,adminControllers.deleteStudentMarkSheet,adminControllers.deleteStudentRecord)
 module.exports = router
