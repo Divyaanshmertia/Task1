@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  title: CSI TASK-1 CRUD API
+  description: This documentation is regarding the task-1 of Celebal Summer Intern in domain of nodeJS
+  version: 1.0
+  contact:
+    email: divyaanshmertia@gmail.com
+  servers:
+    -url: http://localhost:9160/
+    description: This is my local Server
+
+schemes: [http,https]    
+
+paths: 
+  /admin/login:
+    get:
+      summary: Returns token as admin logs in
+      description: Admin will send it's AdminID and in response a token will be generated.
+      responses:
+        200:
+          description: Success
+           parameters:
+            - in: body
+              AdminID: A001
+              description: The user to create.
+          schema:
+            type: string
+            exapmle: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJTdHVkZW50SUQiOiIxOUVKSUNTMDUxIiwiaWF0IjoxNjU0OTMzNTA3LCJleHAiOjE2NTQ5Njk1MDd9.7Zs93Vc3GOC0pGACsz40D_um5lYnoL_2dLJa2n4wjaQ
+
+        404:
+          description: Admin doesn't exist!

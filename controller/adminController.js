@@ -71,10 +71,10 @@ exports.LoginAdmin = (req, res) => {
         const token = getToken(user);
 
         console.info("login done");
-        return res.status(200).send({
-            user,
+        return res.status(200).send(
+        
             token
-        });
+        );
 
     }).catch((error) => {
         return res.status(404).send(`${AdminID} doesnt exist`);

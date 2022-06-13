@@ -1,8 +1,14 @@
 const express = require("express")
 const app = express()
+const swaggerUI = require("swagger-ui-express")
+const YAML = require("yamljs")
+const swaggerJsDocs = YAML.load("./api.yaml")
+app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerJsDocs))
 const adminRoutes = require("./routes/adminRoutes");
 const studentRoutes = require("./routes/studentRoutes")
 const mongoose = require("mongoose")
+
+
 app.use(express.urlencoded({
     extended: false
 }))
