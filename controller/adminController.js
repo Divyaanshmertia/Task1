@@ -96,8 +96,8 @@ exports.createMarklist = (req, res) => {
 
 
     } = req.body;
-    let TotalMarks = Algorithms + OperatingSystems + CompilerDesign + DatabaseManagement + ComputerNetworks
-
+    let TotalMarks = (parseInt(Algorithms) + parseInt(OperatingSystems) + parseInt(CompilerDesign) + parseInt(DatabaseManagement) + parseInt(ComputerNetworks))
+    let Percentage = TotalMarks/500 * 100
 
     Student.findOne({
         StudentID: StudentID
@@ -112,7 +112,8 @@ exports.createMarklist = (req, res) => {
             CompilerDesign,
             DatabaseManagement,
             ComputerNetworks,
-            TotalMarks
+            TotalMarks,
+            Percentage
         })
         markSheet.save().then(() => {
             console.log("Save")
@@ -156,7 +157,7 @@ exports.updateAdmin = (req, res) => {
         });
 };
 
-exports.updateStudent = (req, res) => {
+exports.updateStudentRecord = (req, res) => {
     let studentId = req.params.id
     let {
         Algorithms,
@@ -164,7 +165,8 @@ exports.updateStudent = (req, res) => {
         CompilerDesign,
         DatabaseManagement,
         ComputerNetworks,
-        TotalMarks
+        TotalMarks,
+        Percentage
     } = req.body
 
     MarkSheet.updateOne({
@@ -176,7 +178,8 @@ exports.updateStudent = (req, res) => {
                 CompilerDesign,
                 DatabaseManagement,
                 ComputerNetworks,
-                TotalMarks
+                TotalMarks,
+                Percentage
             }
         })
         .then((updateResult) => {
