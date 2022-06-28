@@ -56,7 +56,7 @@ exports.canEditAdmin = (req, res, next) => {
     try {
       if (!req.headers.token) {
         console.error("No token was sent");
-        return res.status(403).send("Invalid token");
+        return res.status(403).send("No token was sent!");
       }
       const decodedToken = JWT.verify(req.headers.token, "CelebalSecretKey");
       

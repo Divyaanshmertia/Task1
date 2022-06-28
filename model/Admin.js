@@ -3,7 +3,9 @@ const mongoose = require("mongoose")
 const Admin = mongoose.Schema({
     AdminID: {
         type: String,
+        unique: true,
         required: true,
+        
     },
     FirstName: {
         type: String,

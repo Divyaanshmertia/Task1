@@ -11,10 +11,10 @@ router.put("/admin/update/:id", middleware.canEditAdmin, adminControllers.update
 
 router.post("/admin/addStudent", middleware.canAddStudent, adminControllers.createStudent);
 
-router.post("/admin/addMarklist",adminControllers.createMarklist )
+router.post("/admin/addMarkSheet",adminControllers.createMarklist )
 
 router.put("/admin/students/:id", middleware.canAddStudent,adminControllers.updateStudentRecord )
 
-router.delete("/admin/students/:id", middleware.canAddStudent,adminControllers.deleteStudentMarkSheet,adminControllers.deleteStudentRecord)
+router.delete("/admin/delete/student/:id", middleware.canAddStudent,adminControllers.deleteStudentMarkSheet,adminControllers.deleteStudentRecord)
 
 module.exports = router
