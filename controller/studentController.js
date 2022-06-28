@@ -22,14 +22,29 @@ exports.getStudentData = (req, res, next) => {
     const decodedToken = JWT.verify(req.headers.token, "CelebalSecretKey");
     Student.findOne({StudentID:decodedToken.StudentID}).then((student)=>{
         {
-          return res.status(200).send(student)
+          res.locals.student = student;
+          return next();
         }
     }).catch((error)=>{
       return res.status(500).send(error)
     })
     
     
-  } 
+  }
+  exports.getStudentMarkList = (req, res) => {
+    
+    const decodedToken = JWT.verify(req.headers.token, "CelebalSecretKey");
+    MarkSheet.findOne({StudentID:decodedToken.StudentID}).then((markSheet)=>{
+        {
+          student = res.locals.student
+         return res.status(200).send({student,markSheet})
+        }
+    }).catch((error)=>{
+      return res.status(500).send(error)
+    })
+    
+    
+  }  
 
   exports.updateStudent = (req, res) => {
     const decodedToken = JWT.verify(req.headers.token, "CelebalSecretKey");
@@ -53,10 +68,14 @@ exports.results = (req,res) =>{
     
     const decodedToken = JWT.verify(req.headers.token, "CelebalSecretKey");
     let q = (Object.keys(req.query))
+    console.log(q)
+
     q1 = q[0];
-    projection = { _id: 0, [q1]: 1 };
-    
-    
+    console.log(q1)
+    var object = q.reduce(
+      (obj, item) => Object.assign(obj, { [item]: 1 }), {});
+      let newObj = {'_id': 0, ...object};
+    projection = newObj;
     console.log(projection)
     MarkSheet.findOne({StudentID:decodedToken.StudentID},projection).then((student)=>{
         {
