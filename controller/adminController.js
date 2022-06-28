@@ -22,13 +22,11 @@ exports.createStudent = (req, res) => {
         Year,
     })
     student.save().then(() => {
-        return res.status(200).send({
-            student
-        });
+        return res.status(200).send("Student successfully registered!");
 
     }).catch((error) => {
         console.error(error);
-        return res.status(500).send("Error")
+        return res.status(403).send("Error")
     })
 }
 
@@ -48,11 +46,7 @@ exports.createAdmin = (req, res) => {
         Gender,
     })
     admin.save().then(() => {
-        const token = getToken(admin);
-        return res.status(200).send({
-            admin,
-            token
-        });
+        return res.status(200).send("Admin Successfully created.");
 
     }).catch((error) => {
         console.error(error);
@@ -189,7 +183,7 @@ exports.updateStudentRecord = (req, res) => {
         })
         .catch((error) => {
             console.error("There was an error while updating user.", error);
-            return res.status(500).send("ERROR");
+            return res.status(404).send("ERROR");
         });
 };
 
@@ -204,21 +198,21 @@ exports.deleteStudentMarkSheet = (req, res,next) => {
     })
     .catch((error) => {
         console.error("There was an error while deleting marksheet.", error);
-        return res.status(500).send("ERROR");
+        return res.status(500).send("There was an error while deleting marksheet.");
     });
 }
 exports.deleteStudentRecord = (req, res) => {
     let studentId = req.params.id
-    Student.deleteOne({StudentID:studentId}).then((student)=>{
+    Student.deleteOne({StudentID:studentId}).then(()=>{
     
         console.info("Student record was successfully deleted.");
         
-        return res.status(200).send(student)
+        return res.status(200).send("Record Deleted Successfully!!")
 
     })
     .catch((error) => {
         console.error("There was an error while deleting user.", error);
-        return res.status(500).send("ERROR");
+        return res.status(500).send("There was an error in deleting user.");
     });
 }
 
