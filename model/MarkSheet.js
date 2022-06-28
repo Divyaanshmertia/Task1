@@ -32,6 +32,9 @@ const MarkSheet = mongoose.Schema({
     TotalMarks:{
         type: Number
         
+    },
+    Percentage:{
+        type:Number
     }
 
 
