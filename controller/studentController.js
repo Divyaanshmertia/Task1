@@ -67,9 +67,30 @@ exports.results = (req,res) =>{
     
     
     const decodedToken = JWT.verify(req.headers.token, "CelebalSecretKey");
-    let q = (Object.keys(req.query))
-    console.log(q)
+  // An Alternate approach  wherein you need to enter all subjects with value either 0 or 1 if 1 then only it 
+  // will display that particular subject
 
+  //   let q = req.query
+  //   console.log(q)
+  //   Object.keys(q).forEach(function(el){
+  //     q[el] = parseInt(q[el])
+  //   })
+  //   const removeZero = item => (
+  //     Object
+  //       .keys(item)
+  //       .filter(key => item[key] !== 0)
+  //       .reduce((newObj, key) => {
+  //         newObj[key] = item[key];
+  //         return newObj;
+  //       }, {})
+  //   );
+  // const result = removeZero(q);
+
+  //     let newObj = {'_id': 0, ...result};
+
+  let q = (Object.keys(req.query)) // in this approach just pass subject name and will get that particular subject
+  //                                NOTE: if passed subjects with any value it will be displayed.
+    console.log(q)
     q1 = q[0];
     console.log(q1)
     var object = q.reduce(
