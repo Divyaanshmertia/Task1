@@ -29,7 +29,7 @@ mongoose.connect(CONNECTION_URI, {
         console.error("There was a problem in connecting to the database")
     })
 app.get("/", (req, res) => {
-    res.status(200).send("Hello world ")
+    res.status(200).send("Hello This is CSI-Task-1 by Divyaansh Mertia")
 })
 
 app.use(adminRoutes);
