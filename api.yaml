@@ -17,7 +17,37 @@ tags:
     description: Everything about Student 
   - name: Admin
     description: Everything about Admin    
-paths: 
+paths:
+    /student/login:
+    post:
+      tags:
+        - Student
+      summary: Student LogIn
+      parameters:
+        - in: body
+          name: StudentID
+          schema:
+            type: object
+            properties:
+              StudentID:
+                type: string
+            
+          required: true   
+      description: This API logs in student by taking it's Student Id and in response sends JWT token.
+      responses:
+        200:
+          description: Success! Displays user token   
+          schema: 
+            type: object
+            properties:
+              token:
+                type: string
+              
+        404:
+          description: User Doesn't exist.
+          schema: 
+            type: string
+
   /me:
     get:
       tags:
@@ -83,36 +113,6 @@ paths:
           description: Token invalid!
         403:
           description: No token was sent!
-
-  /student/login:
-    post:
-      tags:
-        - Student
-      summary: Student LogIn
-      parameters:
-        - in: body
-          name: StudentID
-          schema:
-            type: object
-            properties:
-              StudentID:
-                type: string
-            
-          required: true   
-      description: This API logs in student by taking it's Student Id and in response sends JWT token.
-      responses:
-        200:
-          description: Success! Displays user token   
-          schema: 
-            type: object
-            properties:
-              token:
-                type: string
-              
-        404:
-          description: User Doesn't exist.
-          schema: 
-            type: string
 
   /student/update:
      put:
@@ -224,6 +224,7 @@ paths:
           description: Admin Doesn't exist.
           schema: 
             type: string
+            
   
   /admin/addStudent:
     post:

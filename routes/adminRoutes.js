@@ -7,7 +7,7 @@ router.post("/admin/addAdmin", adminControllers.createAdmin)
 
 router.post("/admin/login", adminControllers.LoginAdmin)
 
-router.put("/admin/update/:id", middleware.canEditAdmin, adminControllers.updateAdmin); // remove.
+router.put("/admin/update/:id", middleware.canEditAdmin, adminControllers.updateAdmin);
 
 router.post("/admin/addStudent", middleware.canAddStudent, adminControllers.createStudent);
 

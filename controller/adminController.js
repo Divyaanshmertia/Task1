@@ -50,7 +50,7 @@ exports.createAdmin = (req, res) => {
 
     }).catch((error) => {
         console.error(error);
-        return res.status(500).send("Error")
+        return res.status(403).send("Error")
     })
 }
 
@@ -126,30 +126,30 @@ exports.createMarklist = (req, res) => {
 }
 
 
-exports.updateAdmin = (req, res) => {
-    let adminId = req.params.id
-    let {
-        FirstName,
-        LastName
-    } = req.body;
-    Admin.updateOne({
-            AdminID: adminId
-        }, {
-            $set: {
-                FirstName,
-                LastName
-            }
-        })
-        .then((updateResult) => {
+// exports.updateAdmin = (req, res) => {
+//     let adminId = req.params.id
+//     let {
+//         FirstName,
+//         LastName
+//     } = req.body;
+//     Admin.updateOne({
+//             AdminID: adminId
+//         }, {
+//             $set: {
+//                 FirstName,
+//                 LastName
+//             }
+//         })
+//         .then((updateResult) => {
 
-            console.info("Admin was successfully updated.");
-            return res.status(200).send("Admin was successfully updated.");
-        })
-        .catch((error) => {
-            console.error("There was an error while updating user.", error);
-            return res.status(500).send("ERROR");
-        });
-};
+//             console.info("Admin was successfully updated.");
+//             return res.status(200).send("Admin was successfully updated.");
+//         })
+//         .catch((error) => {
+//             console.error("There was an error while updating user.", error);
+//             return res.status(500).send("ERROR");
+//         });
+// };
 
 exports.updateStudentRecord = (req, res) => {
     let studentId = req.params.id
