@@ -7,6 +7,7 @@ app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerJsDocs))
 const adminRoutes = require("./routes/adminRoutes");
 const studentRoutes = require("./routes/studentRoutes")
 const mongoose = require("mongoose")
+const CONNECTION_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/Celebal";
 
 
 app.use(express.urlencoded({
@@ -17,7 +18,7 @@ app.use(express.json())
 
 
 // Connecting to MongoDB
-mongoose.connect("mongodb://localhost:27017/Celebal", {
+mongoose.connect(CONNECTION_URI, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
 
@@ -35,7 +36,7 @@ app.use(adminRoutes);
 app.use(studentRoutes);
 
 
-const Port = 9160;
+const Port = process.env.PORT || 9160
 app.listen(Port, () => {
     console.log(`Connection Established with port number: ${Port}`)
 })
