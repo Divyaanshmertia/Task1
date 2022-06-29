@@ -7,8 +7,8 @@ app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerJsDocs))
 const adminRoutes = require("./routes/adminRoutes");
 const studentRoutes = require("./routes/studentRoutes")
 const mongoose = require("mongoose")
-const CONNECTION_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/Celebal";
-
+const CONNECTION_URI ="mongodb+srv://dmertia:dmertia@celebal.bdnhx1k.mongodb.net/?retryWrites=true&w=majority";
+require('dotenv').config({path: './config.env'})
 
 app.use(express.urlencoded({
     extended: false
