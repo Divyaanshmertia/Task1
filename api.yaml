@@ -40,7 +40,7 @@ paths:
           description: Token invalid!
         403:
           description: No token was sent!
-  /student/result:
+  /student/results:
     get:
       tags:
         - Student
@@ -84,7 +84,7 @@ paths:
         403:
           description: No token was sent!
 
-  /student/Login:
+  /student/login:
     post:
       tags:
         - Student
