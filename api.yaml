@@ -19,374 +19,374 @@ tags:
     description: Everything about Admin    
 paths:
     /student/login:
-    post:
-      tags:
-        - Student
-      summary: Student LogIn
-      parameters:
-        - in: body
-          name: StudentID
-          schema:
-            type: object
-            properties:
-              StudentID:
-                type: string
-            
-          required: true   
-      description: This API logs in student by taking it's Student Id and in response sends JWT token.
-      responses:
-        200:
-          description: Success! Displays user token   
-          schema: 
-            type: object
-            properties:
-              token:
-                type: string
+      post:
+        tags:
+          - Student
+        summary: Student LogIn
+        parameters:
+          - in: body
+            name: StudentID
+            schema:
+              type: object
+              properties:
+                StudentID:
+                  type: string
               
-        404:
-          description: User Doesn't exist.
-          schema: 
-            type: string
+            required: true   
+        description: This API logs in student by taking it's Student Id and in response sends JWT token.
+        responses:
+          200:
+            description: Success! Displays user token   
+            schema: 
+              type: object
+              properties:
+                token:
+                  type: string
+                
+          404:
+            description: User Doesn't exist.
+            schema: 
+              type: string
 
-  /me:
-    get:
-      tags:
-        - Student
-      summary: Student can view their details both personal and course details.
-      parameters:
-        - in: header
-          name: token
-          schema:
-            type: string
-            format: uuid
-          required: true   
-      description: This API fetches personal details of students like name, DOB etc and all course related detials like marks in subjects.
-      responses:
-        200:
-          description: Success! Displays all the details of a student.    
-          schema: 
-            $ref: '#/components/schemas/StudentData'
-        401:
-          description: Token invalid!
-        403:
-          description: No token was sent!
-  /student/results:
-    get:
-      tags:
-        - Student
-      summary: Lists subjects selected by student
-      parameters:
-        - in: header
-          name: token
-          schema:
-            type: string
-            format: uuid
-          required: true   
-        - in: query
-          name: TotalMarks
-          description: will display Total marks.
-        - in: query
-          name: Percentage
-          description: will display Percentage.
-        - in: query
-          name: Algorithms
-          description: will display marks obtained in Algorithms.
-        - in: query
-          name: CompilerDesign
-          description: will display marks obtained in Compiler Design.  
-        - in: query
-          name: OperatingSystems
-          description: will marks obtained in Operating Systems.
-        - in: query
-          name: DatabaseManagement
-          description: will marks obtained in Database Management.
-        - in: query
-          name: ComputerNetworks
-          description: will marks obtained in Computer Networks.    
-      description: This API shows only those subjects which are passed as query parameters. Just put any value on the subjects you want to be displayed.
-      responses:
-        200:
-          description: Success! Displays marks obtained in all those subjects which were passed as query parameters    
-          schema: 
-            $ref: '#/components/schemas/markSheet'
-        401:
-          description: Token invalid!
-        403:
-          description: No token was sent!
+    /me:
+      get:
+        tags:
+          - Student
+        summary: Student can view their details both personal and course details.
+        parameters:
+          - in: header
+            name: token
+            schema:
+              type: string
+              format: uuid
+            required: true   
+        description: This API fetches personal details of students like name, DOB etc and all course related detials like marks in subjects.
+        responses:
+          200:
+            description: Success! Displays all the details of a student.    
+            schema: 
+              $ref: '#/components/schemas/StudentData'
+          401:
+            description: Token invalid!
+          403:
+            description: No token was sent!
+    /student/results:
+      get:
+        tags:
+          - Student
+        summary: Lists subjects selected by student
+        parameters:
+          - in: header
+            name: token
+            schema:
+              type: string
+              format: uuid
+            required: true   
+          - in: query
+            name: TotalMarks
+            description: will display Total marks.
+          - in: query
+            name: Percentage
+            description: will display Percentage.
+          - in: query
+            name: Algorithms
+            description: will display marks obtained in Algorithms.
+          - in: query
+            name: CompilerDesign
+            description: will display marks obtained in Compiler Design.  
+          - in: query
+            name: OperatingSystems
+            description: will marks obtained in Operating Systems.
+          - in: query
+            name: DatabaseManagement
+            description: will marks obtained in Database Management.
+          - in: query
+            name: ComputerNetworks
+            description: will marks obtained in Computer Networks.    
+        description: This API shows only those subjects which are passed as query parameters. Just put any value on the subjects you want to be displayed.
+        responses:
+          200:
+            description: Success! Displays marks obtained in all those subjects which were passed as query parameters    
+            schema: 
+              $ref: '#/components/schemas/markSheet'
+          401:
+            description: Token invalid!
+          403:
+            description: No token was sent!
 
-  /student/update:
-     put:
-      tags:
-        - Student
-      summary: student can update it's personal details
-      parameters:
-        - in: header
-          name: token
-          schema:
-            type: string
-            format: uuid
-          required: true   
-        - in: body
-          name: student
-          schema:
-            type: object
-            properties:
-              FirstName:
-                type: string
-              LastName:
-                type: string
-              DOB:
-                type: string 
-                format: date
-              Gender:
-                type: string
-              Year:
-                type: integer
-      description: This API updates students detail like name, DOB etc. in presence of valid token.
-      responses:
-        200:
-          description: Success! Displays user token   
-          schema: 
-            type: string
+    /student/update:
+      put:
+        tags:
+          - Student
+        summary: student can update it's personal details
+        parameters:
+          - in: header
+            name: token
+            schema:
+              type: string
+              format: uuid
+            required: true   
+          - in: body
+            name: student
+            schema:
+              type: object
+              properties:
+                FirstName:
+                  type: string
+                LastName:
+                  type: string
+                DOB:
+                  type: string 
+                  format: date
+                Gender:
+                  type: string
+                Year:
+                  type: integer
+        description: This API updates students detail like name, DOB etc. in presence of valid token.
+        responses:
+          200:
+            description: Success! Displays user token   
+            schema: 
+              type: string
+                
+          404:
+            description: User Doesn't exist.
+            schema: 
+              type: string
+          401:
+            description: Token invalid!
+            schema: 
+              type: string
+          403:
+            description: No token was sent!
+            schema: 
+              type: string
+
+
+    /admin/addAdmin:
+      post:
+        tags:
+          - Admin 
+        summary: Admin Registration
+        parameters:
+          - in: body
+            name: admin
+            schema:
+              type: object
+              properties:
+                AdminID:
+                  type: string
+                FirstName:
+                  type: string
+                LastName:
+                  type: string
+                DOB:
+                  type: string 
+                  format: date
+                Gender:
+                  type: string
+            required: true   
+        description: This API registers the admin 
+        responses:
+          200:
+            description: Success!
+            schema: 
+              type: string
+                
+          403:
+            description: Admin already exists!
+            schema: 
+              type: string
+    
+    /admin/login:
+      post:
+        tags:
+          - Admin
+        summary: Admin LogIn
+        parameters:
+          - in: body
+            name: AdminID
+            schema:
+              type: object
+              properties:
+                AdminID:
+                  type: string
+            required: true   
+        description: This API logs in Admin by taking it's Admin Id and in response sends JWT token.
+        responses:
+          200:
+            description: Success! Displays admin token   
+            schema: 
+              type: string
               
-        404:
-          description: User Doesn't exist.
-          schema: 
-            type: string
-        401:
-          description: Token invalid!
-          schema: 
-            type: string
-        403:
-          description: No token was sent!
-          schema: 
-            type: string
-
-
-  /admin/addAdmin:
-    post:
-      tags:
-        - Admin 
-      summary: Admin Registration
-      parameters:
-        - in: body
-          name: admin
-          schema:
-            type: object
-            properties:
-              AdminID:
-                type: string
-              FirstName:
-                type: string
-              LastName:
-                type: string
-              DOB:
-                type: string 
-                format: date
-              Gender:
-                type: string
-          required: true   
-      description: This API registers the admin 
-      responses:
-        200:
-          description: Success!
-          schema: 
-            type: string
+                
+          404:
+            description: Admin Doesn't exist.
+            schema: 
+              type: string
               
-        403:
-          description: Admin already exists!
-          schema: 
-            type: string
-  
-  /admin/Login:
-    post:
-      tags:
-        - Admin
-      summary: Admin LogIn
-      parameters:
-        - in: body
-          name: AdminID
-          schema:
-            type: object
-            properties:
-              AdminID:
-                type: string
-          required: true   
-      description: This API logs in Admin by taking it's Admin Id and in response sends JWT token.
-      responses:
-        200:
-          description: Success! Displays admin token   
-          schema: 
-            type: string
-            
-              
-        404:
-          description: Admin Doesn't exist.
-          schema: 
-            type: string
-            
-  
-  /admin/addStudent:
-    post:
-      tags:
-        - Admin 
-      summary: Student Registration
-      parameters:
-        - in: header
-          name: token
-          schema:
-            type: string
-            format: uuid
-          required: true   
+    
+    /admin/addStudent:
+      post:
+        tags:
+          - Admin 
+        summary: Student Registration
+        parameters:
+          - in: header
+            name: token
+            schema:
+              type: string
+              format: uuid
+            required: true   
 
-        - in: body
-          name: student
-          schema:
-            type: object
-            properties:
-              StudentID:
-                type: string
-              FirstName:
-                type: string
-              LastName:
-                type: string
-              DOB:
-                type: string 
-                format: date
-              Gender:
-                type: string
-              Year:
-                type: integer  
-          required: true   
-      description: Admin registers a student. 
-      responses:
-        200:
-          description: Student successfully registered!
-          schema: 
-            type: string
-              
-        403:
-          description: student already exists!
-          schema: 
-            type: string
+          - in: body
+            name: student
+            schema:
+              type: object
+              properties:
+                StudentID:
+                  type: string
+                FirstName:
+                  type: string
+                LastName:
+                  type: string
+                DOB:
+                  type: string 
+                  format: date
+                Gender:
+                  type: string
+                Year:
+                  type: integer  
+            required: true   
+        description: Admin registers a student. 
+        responses:
+          200:
+            description: Student successfully registered!
+            schema: 
+              type: string
+                
+          403:
+            description: student already exists!
+            schema: 
+              type: string
 
-  /admin/addMarkSheet:
-    post:
-      tags:
-        - Admin 
-      summary: Marks Insertion
-      parameters:
-        - in: header
-          name: token
-          schema:
-            type: string
-          required: true   
+    /admin/addMarkSheet:
+      post:
+        tags:
+          - Admin 
+        summary: Marks Insertion
+        parameters:
+          - in: header
+            name: token
+            schema:
+              type: string
+            required: true   
 
-        - in: body
-          name: marksheet
-          schema:
-            type: object
-            properties:
-              StudentID:
-                type: string
-              Algorithms:
-                type: integer
-              OperatingSystems:
-                type: integer
-              CompilerDesign:
-                type: integer
-              DatabaseManagement:
-                type: integer
-              ComputerNetworks:
-                type: integer                      
-          required: true   
-      description: Admin inserts student's academic record
-      responses:
-        200:
-          description: Record Successfully inserted.
-          schema: 
-            type: string
-              
-        403:
-          description: student's record already exists!
-          schema: 
-            type: string
+          - in: body
+            name: marksheet
+            schema:
+              type: object
+              properties:
+                StudentID:
+                  type: string
+                Algorithms:
+                  type: integer
+                OperatingSystems:
+                  type: integer
+                CompilerDesign:
+                  type: integer
+                DatabaseManagement:
+                  type: integer
+                ComputerNetworks:
+                  type: integer                      
+            required: true   
+        description: Admin inserts student's academic record
+        responses:
+          200:
+            description: Record Successfully inserted.
+            schema: 
+              type: string
+                
+          403:
+            description: student's record already exists!
+            schema: 
+              type: string
 
-  /admin/students/{id}:
-     put:
-      tags:
-        - Admin
-      summary: updation of student academic record.
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: token
-          schema:
-            type: string
-          required: true   
-        - in: body
-          name: student
-          schema:
-            $ref: '#/components/schemas/markSheet'
-      description: This API updates student's academic record in presence of valid token.
-      responses:
-        200:
-          description: MarkSheet updated successfully!
-          schema: 
-            type: string
-              
-        404:
-          description: MarkSheet doesn't exist
-          schema: 
-            type: string
-        401:
-          description: Token invalid!
-          schema: 
-            type: string
-        403:
-          description: No token was sent!
-          schema: 
-            type: string 
+    /admin/students/{id}:
+      put:
+        tags:
+          - Admin
+        summary: updation of student academic record.
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: string
+            required: true
+          - in: header
+            name: token
+            schema:
+              type: string
+            required: true   
+          - in: body
+            name: student
+            schema:
+              $ref: '#/components/schemas/markSheet'
+        description: This API updates student's academic record in presence of valid token.
+        responses:
+          200:
+            description: MarkSheet updated successfully!
+            schema: 
+              type: string
+                
+          404:
+            description: MarkSheet doesn't exist
+            schema: 
+              type: string
+          401:
+            description: Token invalid!
+            schema: 
+              type: string
+          403:
+            description: No token was sent!
+            schema: 
+              type: string 
 
-  /admin/delete/student/{id}:
-     delete:
-      tags:
-        - Admin
-      summary: deletion of student record
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-          required: true
-        - in: header
-          name: token
-          schema:
-            type: string
-          required: true   
-      description: This API deletes a student's record both academic and personal in presence of valid token.
-      responses:
-        200:
-          description: Student record deleted successfully!
-          schema: 
-            type: string
-              
-        404:
-          description: can't delete student's record.
-          schema: 
-            type: string
-        401:
-          description: Token invalid!
-          schema: 
-            type: string
-        403:
-          description: No token was sent!
-          schema: 
-            type: string                             
+    /admin/delete/student/{id}:
+      delete:
+        tags:
+          - Admin
+        summary: deletion of student record
+        parameters:
+          - in: path
+            name: id
+            schema:
+              type: string
+            required: true
+          - in: header
+            name: token
+            schema:
+              type: string
+            required: true   
+        description: This API deletes a student's record both academic and personal in presence of valid token.
+        responses:
+          200:
+            description: Student record deleted successfully!
+            schema: 
+              type: string
+                
+          404:
+            description: can't delete student's record.
+            schema: 
+              type: string
+          401:
+            description: Token invalid!
+            schema: 
+              type: string
+          403:
+            description: No token was sent!
+            schema: 
+              type: string                             
 
 
 components:
